@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Query,
+  Res,
 } from '@nestjs/common';
 import { UrlService } from './url.service';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -20,8 +21,9 @@ export class UrlController {
   }
 
   @Get(':shortenedUrl')
-  async find(@Param('shortenedUrl') shortenedUrl: string) {
-    return await this.urlService.find(shortenedUrl);
+  async find(@Res() res, @Param('shortenedUrl') shortenedUrl: string) {
+    const url = await this.urlService.find(shortenedUrl);
+    return res.redirect(url);
   }
 
   @Post()
