@@ -32,7 +32,7 @@ export class UrlController {
   }
 
   @Delete(':shortenedUrl')
-  async deleteUrl(@Body() body: { url: string }) {
-    return await this.urlService.delete(body.url);
+  async deleteUrl(@Param('shortenedUrl') shortenedUrl: string) {
+    return await this.urlService.delete(shortenedUrl);
   }
 }
